@@ -1,0 +1,38 @@
+{
+  "name": "translation-format-check-tool",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Translation Format Batch Checker",
+  "main": "electron-main.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test",
+    "build": "electron-builder --win portable",
+    "pack": "electron-builder --dir"
+  },
+  "build": {
+    "appId": "com.translationtools.formatchecker",
+    "productName": "Translation Checker",
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": "portable",
+      "icon": "icon.ico"
+    },
+    "portable": {
+      "artifactName": "TranslationChecker-Portable.exe"
+    },
+    "files": [
+      "server.js",
+      "index.html",
+      "src/**/*",
+      "output/**/*",
+      "package.json"
+    ]
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.0.0"
+  }
+}

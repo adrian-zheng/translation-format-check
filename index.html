@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>译文格式批量校对</title>
+    <link rel="stylesheet" href="./src/styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="masthead">
+        <div>
+          <p class="eyebrow">CN-EN Translation QA</p>
+          <h1>译文格式批量校对</h1>
+        </div>
+      </header>
+
+      <section class="batch-panel" aria-label="文件批量检查">
+        <div class="batch-upload">
+          <div>
+            <h2>文件批量检查</h2>
+            <p>上传 CSV 或 XLSX，自动识别译文列并逐行检查。</p>
+          </div>
+          <label class="file-picker">
+            <input id="fileInput" type="file" accept=".csv,.xlsx,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+            <span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M11 16V7.8L8.1 10.7 6.7 9.3 12 4l5.3 5.3-1.4 1.4L13 7.8V16h-2Zm-6 4v-6h2v4h10v-4h2v6H5Z"></path>
+              </svg>
+              选择文件
+            </span>
+          </label>
+          <button id="uploadButton" type="button" title="检查上传文件">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 5h9v2H6v10h12v-5h2v7H4V5Zm13.6-.4 1.4 1.4-7.8 7.8H9.8v-1.4l7.8-7.8ZM14 4h6v6h-2V7.4l-6.9 6.9-1.4-1.4L16.6 6H14V4Z"></path>
+            </svg>
+            批量检查
+          </button>
+        </div>
+
+        <div id="batchStatus" class="batch-status">尚未上传文件。</div>
+
+        <div class="batch-summary" aria-label="批量检查概览">
+          <span><strong id="batchTotal">0</strong> records</span>
+          <span><strong id="batchChanged">0</strong> changed</span>
+          <span><strong id="batchColumn">-</strong> column</span>
+          <span><strong id="batchIssues">0</strong> issues</span>
+        </div>
+
+        <div class="batch-actions">
+          <div class="batch-filters" aria-label="记录筛选">
+            <button id="filterAll" type="button" class="filter-button active" aria-pressed="true">全量记录</button>
+            <button id="filterChanged" type="button" class="filter-button" aria-pressed="false">只看修改</button>
+          </div>
+          <div class="export-controls" aria-label="导出修正文件">
+            <select id="exportFormat" aria-label="导出格式">
+              <option value="xlsx">导出为 XLSX</option>
+              <option value="csv">导出为 CSV</option>
+            </select>
+            <button id="exportButton" type="button" title="导出修正后的文件" disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M11 4h2v8l3-3 1.4 1.4L12 15.8l-5.4-5.4L8 9l3 3V4ZM5 18h14v2H5v-2Z"></path>
+              </svg>
+              导出文件
+            </button>
+          </div>
+        </div>
+
+        <div id="batchResults" class="batch-results" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <div id="tooltipLayer" class="floating-tooltip" role="tooltip" hidden></div>
+    <script src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js"></script>
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
